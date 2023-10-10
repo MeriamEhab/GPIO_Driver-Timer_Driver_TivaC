@@ -1,0 +1,61 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\XclFileGenerator.exe" $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$in+++"C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\XclFileGenerator.exe" $flags
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\SourceIndexer.exe" $flags
+  depfile = $out.dep
+  description = IAR_NEW_TOOL+++INDEXER+++$out+++"C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\SourceIndexer.exe" $flags
+
+rule MAKEBROWSE
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\makeBrowseData.exe" $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out+++"C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\makeBrowseData.exe" $flags
+
+rule PDBLINK
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\PbdLink.exe" $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out+++"C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\PbdLink.exe" $flags
+
+
+
+#Build steps
+build D$:\GPIO\Debug\BrowseInfo\GPIO.xcl : COMPILER_XCL 
+  xclcommand = -source_file "D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\GPIO.c" -xcl_file D$:\GPIO\Debug\BrowseInfo\GPIO.xcl -macro_file D$:\GPIO\Debug\BrowseInfo\GPIO.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\bin\iccarm.exe"
+  flags = "D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\GPIO.c" -o D$:\GPIO\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros D$:\GPIO\Debug\BrowseInfo\GPIO.tmp
+  rspfile_name = D$:\GPIO\Debug\BrowseInfo\GPIO.xcl.rsp
+
+build D$:\GPIO\Debug\BrowseInfo\main.xcl : COMPILER_XCL 
+  xclcommand = -source_file D$:\GPIO\main.c -xcl_file D$:\GPIO\Debug\BrowseInfo\main.xcl -macro_file D$:\GPIO\Debug\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\bin\iccarm.exe"
+  flags = D$:\GPIO\main.c -o D$:\GPIO\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros D$:\GPIO\Debug\BrowseInfo\main.tmp
+  rspfile_name = D$:\GPIO\Debug\BrowseInfo\main.xcl.rsp
+
+build D$:\GPIO\Debug\BrowseInfo\startup_ewarm.xcl : COMPILER_XCL 
+  xclcommand = -source_file "D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\startup_ewarm.c" -xcl_file D$:\GPIO\Debug\BrowseInfo\startup_ewarm.xcl -macro_file D$:\GPIO\Debug\BrowseInfo\startup_ewarm.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\bin\iccarm.exe"
+  flags = "D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\startup_ewarm.c" -o D$:\GPIO\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\arm\inc\c\DLib_Config_Normal.h" -Ol --predef_macros D$:\GPIO\Debug\BrowseInfo\startup_ewarm.tmp
+  rspfile_name = D$:\GPIO\Debug\BrowseInfo\startup_ewarm.xcl.rsp
+
+build D$:\GPIO\Debug\BrowseInfo\GPIO.pbi : INDEXER D$:\GPIO\Debug\BrowseInfo\GPIO.xcl |  $
+D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\GPIO.c
+  flags = -out=D$:\GPIO\Debug\BrowseInfo\GPIO.pbi -f D$:\GPIO\Debug\BrowseInfo\GPIO.xcl
+
+build D$:\GPIO\Debug\BrowseInfo\main.pbi : INDEXER D$:\GPIO\Debug\BrowseInfo\main.xcl |  $
+D$:\GPIO\main.c
+  flags = -out=D$:\GPIO\Debug\BrowseInfo\main.pbi -f D$:\GPIO\Debug\BrowseInfo\main.xcl
+
+build D$:\GPIO\Debug\BrowseInfo\startup_ewarm.pbi : INDEXER D$:\GPIO\Debug\BrowseInfo\startup_ewarm.xcl |  $
+D$:\Downloads_\Embedded$ Diploma$ Projects\Three-Mode-Application-main\Three-Mode-Application-main\Three$ modes$ Application\startup_ewarm.c
+  flags = -out=D$:\GPIO\Debug\BrowseInfo\startup_ewarm.pbi -f D$:\GPIO\Debug\BrowseInfo\startup_ewarm.xcl
+
+build D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbw : MAKEBROWSE D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbd
+  flags = D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbd -output D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbw
+
+build D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbd : PDBLINK D$:\GPIO\Debug\BrowseInfo\GPIO.pbi |  $
+D$:\GPIO\Debug\BrowseInfo\main.pbi $
+D$:\GPIO\Debug\BrowseInfo\startup_ewarm.pbi
+  flags = -M D$:\GPIO\Debug\BrowseInfo\GPIO_Driver.pbd D$:\GPIO\Debug\BrowseInfo\GPIO.pbi D$:\GPIO\Debug\BrowseInfo\main.pbi D$:\GPIO\Debug\BrowseInfo\startup_ewarm.pbi
+

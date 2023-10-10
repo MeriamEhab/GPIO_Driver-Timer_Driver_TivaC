@@ -1,0 +1,230 @@
+###############################################################################
+#
+# IAR ELF Linker V9.30.1.335/W64 for ARM                  11/Oct/2023  01:53:54
+# Copyright 2007-2022 IAR Systems AB.
+#
+#    Output file  =  D:\GPIO\Debug\Exe\GPIO_Driver.out
+#    Map file     =  D:\GPIO\Debug\List\GPIO_Driver.map
+#    Command line =
+#        -f D:\GPIO\Debug\Exe\GPIO_Driver.out.rsp (D:\GPIO\Debug\Obj\GPIO.o
+#        D:\GPIO\Debug\Obj\main.o D:\GPIO\Debug\Obj\startup_ewarm.o
+#        --no_out_extension -o D:\GPIO\Debug\Exe\GPIO_Driver.out --redirect
+#        _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb --map
+#        D:\GPIO\Debug\List\GPIO_Driver.map --config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\arm\config\generic_cortex.icf"
+#        --semihosting --entry __iar_program_start --vfe --text_out locale
+#        --cpu=Cortex-M3 --fpu=None)
+#
+###############################################################################
+
+*******************************************************************************
+*** MESSAGES
+***
+
+Error[Li005]: no definition for "Timer0AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+Error[Li005]: no definition for "Timer1AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+Error[Li005]: no definition for "Timer2AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+Error[Li005]: no definition for "Timer3AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+Error[Li005]: no definition for "Timer4AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+Error[Li005]: no definition for "Timer5AIntHandler" [referenced from
+          D:\GPIO\Debug\Obj\startup_ewarm.o]
+
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__CPP_Runtime   = 1
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because --advanced_heap
+was not specified and the application did not appear to
+be primarily optimized for speed.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x0 to 0x7'ffff] { ro };
+define block CSTACK with size = 1K, alignment = 8 { };
+define block PROC_STACK with size = 0, alignment = 8 { };
+define block HEAP with size = 2K, alignment = 8 { };
+"P2":  place in [from 0x2000'0000 to 0x2000'ffff] {
+          rw, block CSTACK, block PROC_STACK, block HEAP };
+do not initialize { section .noinit };
+
+  Section          Kind         Address   Size  Object
+  -------          ----         -------   ----  ------
+"A0":                                    0x26c
+  .intvec          const            0x0  0x26c  startup_ewarm.o [1]
+                                - 0x26c  0x26c
+
+"P1":                                    0x1dc
+  .text            ro code        0x26c   0xe4  GPIO.o [1]
+  .text            ro code        0x350   0x38  zero_init3.o [3]
+  .text            ro code        0x388   0x28  data_init.o [3]
+  .iar.init_table  const          0x3b0   0x10  - Linker created -
+  .text            ro code        0x3c0   0x1e  startup_ewarm.o [1]
+  .text            ro code        0x3de    0x2  vectortrap_M.o [3]
+  .text            ro code        0x3e0   0x1c  cstartup_M.o [3]
+  .text            ro code        0x3fc   0x1e  cmain.o [3]
+  .text            ro code        0x41a    0x4  low_level_init.o [2]
+  .text            ro code        0x41e    0x4  main.o [1]
+  .text            ro code        0x422    0x4  exit.o [2]
+  .text            ro code        0x428    0xa  cexit.o [3]
+  .text            ro code        0x434   0x14  exit.o [4]
+  .rodata          const          0x448    0x0  zero_init3.o [3]
+                                - 0x448  0x1dc
+
+"P2", part 1 of 2:                        0x18
+  .bss             zero     0x2000'0000    0x4  GPIO.o [1]
+  .bss             zero     0x2000'0004    0x4  GPIO.o [1]
+  .bss             zero     0x2000'0008    0x4  GPIO.o [1]
+  .bss             zero     0x2000'000c    0x4  GPIO.o [1]
+  .bss             zero     0x2000'0010    0x4  GPIO.o [1]
+  .bss             zero     0x2000'0014    0x4  GPIO.o [1]
+                          - 0x2000'0018   0x18
+
+"P2", part 2 of 2:                       0x200
+  .noinit          uninit   0x2000'0018  0x200  startup_ewarm.o [1]
+                          - 0x2000'0218  0x200
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+        0x448     0x7'ffff  0x7'fbb8
+  0x2000'0218  0x2000'ffff    0xfde8
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x18:
+          0x2000'0000  0x18
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module            ro code  ro data  rw data
+    ------            -------  -------  -------
+command line/config:
+    -------------------------------------------
+    Total:
+
+D:\GPIO\Debug\Obj: [1]
+    GPIO.o                228                24
+    main.o                  4
+    startup_ewarm.o        30      620      512
+    -------------------------------------------
+    Total:                262      620      536
+
+dl7M_tln.a: [2]
+    exit.o                  4
+    low_level_init.o        4
+    -------------------------------------------
+    Total:                  8
+
+rt7M_tl.a: [3]
+    cexit.o                10
+    cmain.o                30
+    cstartup_M.o           28
+    data_init.o            40
+    vectortrap_M.o          2
+    zero_init3.o           56
+    -------------------------------------------
+    Total:                166
+
+shb_l.a: [4]
+    exit.o                 20
+    -------------------------------------------
+    Total:                 20
+
+    Gaps                    4
+    Linker created                  16
+-----------------------------------------------
+    Grand Total:          460      636      536
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base         0x3b0          --   Gb  - Linker created -
+.iar.init_table$$Limit        0x3c0          --   Gb  - Linker created -
+?main                         0x3fd         Code  Gb  cmain.o [3]
+BusFault_Handler              0x3df         Code  Wk  vectortrap_M.o [3]
+DebugMon_Handler              0x3df         Code  Wk  vectortrap_M.o [3]
+FaultISR                      0x3db    0x2  Code  Lc  startup_ewarm.o [1]
+G_Call_Back_Ptr_PORTA   0x2000'0000    0x4  Data  Lc  GPIO.o [1]
+G_Call_Back_Ptr_PORTB   0x2000'0004    0x4  Data  Lc  GPIO.o [1]
+G_Call_Back_Ptr_PORTC   0x2000'0008    0x4  Data  Lc  GPIO.o [1]
+G_Call_Back_Ptr_PORTD   0x2000'000c    0x4  Data  Lc  GPIO.o [1]
+G_Call_Back_Ptr_PORTE   0x2000'0010    0x4  Data  Lc  GPIO.o [1]
+G_Call_Back_Ptr_PORTF   0x2000'0014    0x4  Data  Lc  GPIO.o [1]
+HardFault_Handler             0x3df         Code  Wk  vectortrap_M.o [3]
+IntDefaultHandler             0x3dd    0x2  Code  Lc  startup_ewarm.o [1]
+MemManage_Handler             0x3df         Code  Wk  vectortrap_M.o [3]
+NMI_Handler                   0x3df         Code  Wk  vectortrap_M.o [3]
+NmiSR                         0x3d9    0x2  Code  Lc  startup_ewarm.o [1]
+PORTAIntHandler               0x26d   0x1e  Code  Gb  GPIO.o [1]
+PORTBIntHandler               0x28b   0x1e  Code  Gb  GPIO.o [1]
+PORTCIntHandler               0x2a9   0x1e  Code  Gb  GPIO.o [1]
+PORTDIntHandler               0x2c7   0x1e  Code  Gb  GPIO.o [1]
+PORTEIntHandler               0x2e5   0x1e  Code  Gb  GPIO.o [1]
+PORTFIntHandler               0x303   0x1e  Code  Gb  GPIO.o [1]
+PendSV_Handler                0x3df         Code  Wk  vectortrap_M.o [3]
+Region$$Table$$Base           0x3b0          --   Gb  - Linker created -
+Region$$Table$$Limit          0x3c0          --   Gb  - Linker created -
+ResetISR                      0x3c1   0x12  Code  Gb  startup_ewarm.o [1]
+SVC_Handler                   0x3df         Code  Wk  vectortrap_M.o [3]
+SysTick_Handler               0x3df         Code  Wk  vectortrap_M.o [3]
+UsageFault_Handler            0x3df         Code  Wk  vectortrap_M.o [3]
+__cmain                       0x3fd         Code  Gb  cmain.o [3]
+__exit                        0x435   0x14  Code  Gb  exit.o [4]
+__iar_data_init3              0x389   0x28  Code  Gb  data_init.o [3]
+__iar_program_start           0x3e1         Code  Gb  cstartup_M.o [3]
+__iar_zero_init3              0x351   0x38  Code  Gb  zero_init3.o [3]
+__low_level_init              0x41b    0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0  0x26c  Data  Gb  startup_ewarm.o [1]
+_call_main                    0x409         Code  Gb  cmain.o [3]
+_exit                         0x429         Code  Gb  cexit.o [3]
+exit                          0x423    0x4  Code  Gb  exit.o [2]
+main                          0x41f    0x4  Code  Gb  main.o [1]
+pui32Stack              0x2000'0018  0x200  Data  Lc  startup_ewarm.o [1]
+
+
+[1] = D:\GPIO\Debug\Obj
+[2] = dl7M_tln.a
+[3] = rt7M_tl.a
+[4] = shb_l.a
+
+  460 bytes of readonly  code memory
+  636 bytes of readonly  data memory
+  536 bytes of readwrite data memory
+
+Errors: 6
+Warnings: none
